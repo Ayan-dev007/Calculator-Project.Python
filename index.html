@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+      <button onclick="clearAll()">C</button>
+      <button onclick="del()">⌫</button>
+      <button onclick="appendValue('/')">/</button>
+      <button onclick="appendValue('*')">*</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="equal" onclick="calculate()">=</button>
+
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
+  </div>
+
+<script>
+  const display = document.getElementById('display');
+
+  function appendValue(val){
+    display.value += val;
+  }
+
+  function clearAll(){
+    display.value = '';
+  }
+
+  function del(){
+    display.value = display.value.slice(0, -1);
+  }
+
+  function calculate(){
+    try{
+      if(display.value.includes('/0') && !display.value.includes('/0.')){
+        // basic check, real divide by zero caught below anyway
+      }
+      let result = eval(display.value);
+      if(result === Infinity || result === -Infinity){
+        display.value = "Can't divide by zero";
+      } else {
+        display.value = result;
+      }
+    } catch(e){
+      display.value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
